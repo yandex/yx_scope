@@ -9,7 +9,7 @@ environment:
   flutter: ">=1.17.0"
 
 dependencies:
-  yx_scope: ^0.1.1
+  yx_scope: ^1.0.0
   flutter:
     sdk: flutter
 
