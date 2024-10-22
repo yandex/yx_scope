@@ -7,7 +7,7 @@ environment:
   sdk: '>=2.18.0 <4.0.0'
 
 dependencies:
-  yx_scope: ^0.1.1
+  yx_scope: ^1.0.0
 
 dev_dependencies:
   lints: ^2.0.0
