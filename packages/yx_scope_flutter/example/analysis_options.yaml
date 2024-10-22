@@ -1,0 +1,12 @@
+include: package:flutter_lints/flutter.yaml
+
+linter:
+  rules:
+    - implementation_imports # https://dart-lang.github.io/linter/lints/implementation_imports.html
+    - prefer_relative_imports # https://dart-lang.github.io/linter/lints/prefer_relative_imports.html
+    - directives_ordering # https://dart-lang.github.io/linter/lints/directives_ordering.html
+    - unawaited_futures # https://dart-lang.github.io/linter/lints/unawaited_futures.html
+
+analyzer:
+  plugins:
+    - custom_lint

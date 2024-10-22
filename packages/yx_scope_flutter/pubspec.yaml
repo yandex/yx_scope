@@ -1,0 +1,19 @@
+name: yx_scope_flutter
+description: Package to use yx_scope with flutter
+version: 1.0.0
+repository: 'https://github.com/yandex/yx_scope/packages/yx_scope_flutter'
+publish_to: 'none'
+
+environment:
+  sdk: '>=2.19.0 <4.0.0'
+  flutter: ">=1.17.0"
+
+dependencies:
+  yx_scope: ^0.1.1
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0

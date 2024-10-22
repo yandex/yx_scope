@@ -1,0 +1,3 @@
+dependency_overrides:
+  yx_scope:
+    path: ../../yx_scope

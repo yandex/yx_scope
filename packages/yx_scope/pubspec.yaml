@@ -1,0 +1,16 @@
+name: yx_scope
+description: Scope management for dependencies
+version: 1.0.0
+repository: 'https://github.com/yandex/yx_scope/packages/yx_scope'
+publish_to: 'none'
+
+environment:
+  sdk: ">=2.19.0 <4.0.0"
+
+dependencies:
+  meta: ^1.8.0
+
+dev_dependencies:
+  test: ^1.16.0
+  lints: ^2.0.1
+

@@ -1,0 +1,16 @@
+name: yx_scope_linter
+description: Lint rules for yx_scope
+version: 0.1.0
+repository: 'https://github.com/yandex/yx_scope/packages/yx_scope_linter'
+
+environment:
+  sdk: '>=2.19.6 <4.0.0'
+
+dependencies:
+  analyzer: ^5.13.0
+  analyzer_plugin: ^0.11.2
+  custom_lint_builder: ^0.5.3
+  yx_scope: ^0.1.1
+
+dev_dependencies:
+  lints: ^2.0.0
