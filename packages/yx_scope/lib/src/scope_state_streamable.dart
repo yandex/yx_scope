@@ -2,8 +2,6 @@ import 'dart:async';
 
 import 'base_scope_container.dart';
 
-
-
 mixin ScopeStateStreamable<Scope> on ScopeStateHolder<Scope> {
   Stream<Scope> get stream {
     late StreamController<Scope> controller;
