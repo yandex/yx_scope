@@ -1,7 +1,7 @@
 name: yx_scope_linter
 description: Lint rules for yx_scope
 version: 0.1.0
-repository: 'https://github.com/yandex/yx_scope/packages/yx_scope_linter'
+repository: 'https://github.com/yandex/yx_scope/tree/main/packages/yx_scope_linter'
 publish_to: 'none'
 
 environment:

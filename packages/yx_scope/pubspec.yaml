@@ -1,7 +1,7 @@
 name: yx_scope
 description: Scope management for dependencies
 version: 1.0.0
-repository: 'https://github.com/yandex/yx_scope/packages/yx_scope'
+repository: 'https://github.com/yandex/yx_scope/tree/main/packages/yx_scope'
 publish_to: 'none'
 
 environment:

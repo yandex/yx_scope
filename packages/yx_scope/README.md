@@ -105,4 +105,4 @@ Due to null-safety, `ScopeHolder` provides a compile-safe check for the existenc
 directly
 at the time of writing code, not at runtime.
 
-![Scope Anatomy](doc/assets/scope_anatomy.png)
+![Scope Anatomy](https://raw.githubusercontent.com/yandex/yx_scope/refs/heads/main/packages/yx_scope/doc/assets/scope_anatomy.png)
