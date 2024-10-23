@@ -1,3 +1,7 @@
+## 1.0.1 - 2024.10.23
+
+* Minor fixes in links
+
 ## 1.0.0 — 2024.10.18
 
 * Ready to be open-source

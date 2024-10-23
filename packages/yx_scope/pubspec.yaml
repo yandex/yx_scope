@@ -1,6 +1,6 @@
 name: yx_scope
 description: A core package of the compile-safe DI framework with advanced scoping capabilities
-version: 1.0.0
+version: 1.0.1
 repository: 'https://github.com/yandex/yx_scope/tree/main/packages/yx_scope'
 publish_to: 'none'
 
