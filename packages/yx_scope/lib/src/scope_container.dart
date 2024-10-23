@@ -15,7 +15,7 @@ abstract class ChildScopeContainer<Parent extends Scope>
   ChildScopeContainer({
     required Parent parent,
     String? name,
-  }): super(name: name) {
+  }) : super(name: name) {
     this.parent = parent;
     _initializeQueueNoDuplications(this);
   }
@@ -27,7 +27,7 @@ abstract class DataScopeContainer<Data> extends ScopeContainer
   DataScopeContainer({
     required Data data,
     String? name,
-  }): super(name: name) {
+  }) : super(name: name) {
     this.data = data;
     _initializeQueueNoDuplications(this);
   }
@@ -47,7 +47,7 @@ abstract class ChildDataScopeContainer<Parent extends Scope, Data>
     required Parent parent,
     required Data data,
     String? name,
-  }): super(name: name) {
+  }) : super(name: name) {
     this.data = data;
     this.parent = parent;
     _initializeQueueNoDuplications(this);
