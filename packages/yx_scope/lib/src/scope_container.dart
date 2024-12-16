@@ -22,7 +22,7 @@ abstract class ChildScopeContainer<Parent extends Scope>
 }
 
 /// {@macro data_scope_container}
-abstract class DataScopeContainer<Data> extends ScopeContainer
+abstract class DataScopeContainer<Data> extends BaseScopeContainer
     with DataScopeContainerMixin<Data> {
   DataScopeContainer({
     required Data data,
