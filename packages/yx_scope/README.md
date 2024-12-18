@@ -33,7 +33,7 @@ Let's look at a simple dependency container. First, add yx_scope to your pubspec
 
 ```yaml
 dependencies:
-    yx_scope: ^1.0.0
+  yx_scope: ^1.0.0
 ```
 
 Create a file named `app_scope.dart` and add the description of our container and dependencies:
@@ -106,3 +106,10 @@ directly
 at the time of writing code, not at runtime.
 
 ![Scope Anatomy](https://raw.githubusercontent.com/yandex/yx_scope/refs/heads/main/packages/yx_scope/doc/assets/scope_anatomy.png)
+
+## Live Templates
+
+You can write code of scopes faster with Live Templates for Intellij IDEA/Android Studio or VSCode.
+
+You can find an
+instruction [in the documentation](https://raw.githubusercontent.com/yandex/yx_scope/refs/heads/main/packages/yx_scope/doc/live_templates.md).

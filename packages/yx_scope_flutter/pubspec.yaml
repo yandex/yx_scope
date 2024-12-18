@@ -1,8 +1,13 @@
 name: yx_scope_flutter
 description: An adapter package that provides yx_scope widgets for Flutter UI integration
-version: 1.0.1
-repository: 'https://github.com/yandex/yx_scope/tree/main/packages/yx_scope_flutter'
+version: 1.0.2
+repository: 'https://github.com/yandex/yx_scope'
 publish_to: 'none'
+topics:
+  - di
+  - scope
+  - dependency-injection
+  - dependency-management
 
 environment:
   sdk: '>=2.19.0 <4.0.0'
