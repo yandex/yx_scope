@@ -38,7 +38,7 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScopeProvider<RootScopeContainer>(
-      scopeStateHolder: scopeHolder,
+      holder: scopeHolder,
       child: MaterialApp(
         title: 'YxScopedFlutter Demo',
         home: const HomePage(),

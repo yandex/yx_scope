@@ -1,3 +1,10 @@
+## 1.0.2 - 2024.12.18
+
+* Fix: corrected an inheritance of DataScopeContainer class to BaseScopeContainer instead of
+  ScopeContainer
+* Updated repository link
+* Library topics added
+
 ## 1.0.1 - 2024.10.23
 
 * Minor fixes in formatting and links
@@ -17,12 +24,17 @@
 * @nonVirtual nonVirtual for dep/asyncDep/rawAsyncDep methods
 
 ## 0.1.2 - 2024.08.20
-* Added optional `name` for `ScopeContainer`, `ChildScopeContainer`, `DataScopeContainer`, `ChildDataScopeContainer`
+
+* Added optional `name`
+  for `ScopeContainer`, `ChildScopeContainer`, `DataScopeContainer`, `ChildDataScopeContainer`
 
 ## 0.1.1 - 2024.05.27
-* Generic type of container for ScopeHolder's changed for strict link ScopedHolder's with ScopeContainer's
+
+* Generic type of container for ScopeHolder's changed for strict link ScopedHolder's with
+  ScopeContainer's
 
 ## 0.1.0 — 2024.05.08
+
 1. All -Node entities has been renamed to -Container
 2. Reorder parent and data args in createContainer methods
 

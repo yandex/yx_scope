@@ -1,3 +1,8 @@
+## 1.0.2 - 2024.12.18
+
+* Updated repository link
+* Library topics added
+
 ## 1.0.1 - 2024.10.23
 
 * Minor fixes in links

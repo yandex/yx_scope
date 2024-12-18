@@ -1,3 +1,10 @@
+## 0.1.2 - 2024.12.18
+
+* Two new manual lint rules: `avoid_child_scope_in_initialize_queue`
+  and `avoid_conditions_in_initialize_queue`
+* Updated repository link
+* Library topics added
+
 ## 0.1.1 - 2024.10.23
 
 * Minor fixes in links
