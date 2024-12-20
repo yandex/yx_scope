@@ -5,4 +5,3 @@ abstract class MapInitializer {
 
   Future<void> dropMap();
 }
-
