@@ -55,14 +55,6 @@ class DIListener implements ScopeListener, DepListener, AsyncDepListener {
       _log('[$scope] -> onScopeDisposeDepFailed', exception, stackTrace);
 
   @override
-  void onDepRegistered(ScopeId scope, DepId dep) =>
-      _log('[$scope.$dep] -> onDepRegistered');
-
-  @override
-  void onDepUnregistered(ScopeId scope, DepId dep) =>
-      _log('[$scope.$dep] -> onDepUnregistered');
-
-  @override
   void onValueStartCreate(ScopeId scope, DepId dep) =>
       _log('[$scope.$dep] -> onValueStartCreate');
 
