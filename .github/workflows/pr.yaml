@@ -1,0 +1,48 @@
+name: CI for PRs
+
+on:
+  pull_request:
+    paths-ignore:
+      - "**.md"
+    branches:
+      - main
+
+jobs:
+  ci_checks:
+    name: CI Checks
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        package:
+          - packages/yx_scope
+          - packages/yx_scope_flutter
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.27.0'
+
+      - name: Install dependencies
+        run: |
+          cd ${{ matrix.package }}
+          flutter pub get
+
+      - name: Check formatting
+        run: |
+          cd ${{ matrix.package }}
+          flutter format --set-exit-if-changed .
+
+      - name: Run linter
+        run: |
+          cd ${{ matrix.package }}
+          flutter analyze
+
+      - name: Run tests
+        run: |
+          cd ${{ matrix.package }}
+          flutter test
