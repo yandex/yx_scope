@@ -17,6 +17,7 @@ jobs:
         package:
           - packages/yx_scope
           - packages/yx_scope_flutter
+          - packages/yx_scope_linter
 
     steps:
       - name: Checkout code
@@ -43,6 +44,7 @@ jobs:
           flutter analyze
 
       - name: Run tests
+        if: matrix.package != 'packages/yx_scope_linter'
         run: |
           cd ${{ matrix.package }}
           flutter test
