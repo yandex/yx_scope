@@ -35,7 +35,7 @@ jobs:
       - name: Check formatting
         run: |
           cd ${{ matrix.package }}
-          flutter format --set-exit-if-changed .
+          dart format --set-exit-if-changed .
 
       - name: Run linter
         run: |
