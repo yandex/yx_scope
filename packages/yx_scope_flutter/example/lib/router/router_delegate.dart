@@ -50,6 +50,8 @@ class AppRouterDelegate extends RouterDelegate<AppState>
     return Navigator(
       key: navigatorKey,
       pages: pages,
+      // TODO: migrate to the new API
+      // ignore: deprecated_member_use
       onPopPage: (route, result) {
         if (!route.didPop(result)) {
           return false;

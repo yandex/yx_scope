@@ -43,8 +43,7 @@ class _MapPageState extends State<MapPage> {
         body: Column(
           children: [
             const Center(
-              child:
-                  Text('Tap a street to select points for navigation'),
+              child: Text('Tap a street to select points for navigation'),
             ),
             Expanded(child: MapWidget(onMapCreated: _onMapCreated)),
           ],
