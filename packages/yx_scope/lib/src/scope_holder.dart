@@ -122,7 +122,8 @@ abstract class ChildScopeHolder<Container extends ChildScopeContainer<Parent>,
 ///
 /// If you need to differentiate [BaseScopeContainer] and it's abstract interface
 /// then you better use [BaseDataScopeHolder] directly.
-abstract class DataScopeHolder<Container extends DataScopeContainer<Data>, Data>
+abstract class DataScopeHolder<Container extends DataScopeContainer<Data>,
+        Data extends Object>
     extends BaseDataScopeHolder<Container, Container, Data> {
   DataScopeHolder({
     List<ScopeListener>? scopeListeners,
@@ -168,9 +169,10 @@ abstract class DataScopeHolder<Container extends DataScopeContainer<Data>, Data>
 /// If you need to differentiate [BaseScopeContainer] and it's abstract interface
 /// then you better use [BaseChildDataScopeHolder] directly.
 abstract class ChildDataScopeHolder<
-    Container extends ChildDataScopeContainer<Parent, Data>,
-    Parent extends Scope,
-    Data> extends BaseChildDataScopeHolder<Container, Container, Parent, Data> {
+        Container extends ChildDataScopeContainer<Parent, Data>,
+        Parent extends Scope,
+        Data extends Object>
+    extends BaseChildDataScopeHolder<Container, Container, Parent, Data> {
   ChildDataScopeHolder(
     Parent parent, {
     List<ScopeListener>? scopeListeners,
@@ -256,7 +258,7 @@ abstract class BaseChildScopeHolder<
 abstract class BaseDataScopeHolder<
         Scope,
         Container extends DataScopeContainer<Data>,
-        Data> extends CoreScopeHolder<Scope, Container>
+        Data extends Object> extends CoreScopeHolder<Scope, Container>
     with _BaseDataScopeHolderMixin<Scope, Container, Data> {
   BaseDataScopeHolder({
     List<ScopeListener>? scopeListeners,
@@ -289,7 +291,7 @@ abstract class BaseChildDataScopeHolder<
         ScopeType,
         Container extends ChildDataScopeContainer<Parent, Data>,
         Parent extends Scope,
-        Data> extends CoreScopeHolder<ScopeType, Container>
+        Data extends Object> extends CoreScopeHolder<ScopeType, Container>
     with
         _BaseChildScopeHolderMixin<ScopeType, Container, Parent>,
         _BaseDataScopeHolderMixin<ScopeType, Container, Data> {
@@ -363,4 +365,4 @@ mixin _BaseChildScopeHolderMixin<
 mixin _BaseDataScopeHolderMixin<
     Scope,
     Container extends DataScopeContainerMixin<Data>,
-    Data> on CoreScopeHolder<Scope, Container> {}
+    Data extends Object> on CoreScopeHolder<Scope, Container> {}
