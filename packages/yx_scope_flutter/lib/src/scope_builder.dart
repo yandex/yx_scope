@@ -78,10 +78,10 @@ class _ScopeBuilderState<T> extends State<ScopeBuilder<T>> {
   @override
   void didUpdateWidget(covariant ScopeBuilder<T> oldWidget) {
     super.didUpdateWidget(oldWidget);
-    final oldHolder =
-        oldWidget.holder ?? ScopeProvider.scopeHolderOf(context, listen: false);
-    final currentHolder = widget.holder ?? oldHolder;
-    if (oldHolder != currentHolder) {
+    final contextHolder =
+        ScopeProvider.scopeHolderOf<T>(context, listen: false);
+    final currentHolder = widget.holder ?? contextHolder;
+    if (_holder != currentHolder) {
       _holder = currentHolder;
       _scope = _holder.scope;
     }

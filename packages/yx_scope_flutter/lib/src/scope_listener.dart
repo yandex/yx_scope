@@ -95,7 +95,6 @@ class ScopeListenerState<T> extends State<ScopeListener<T>> {
 
   void _subscribe() {
     if (mounted) {
-      widget.listener(context, _holder.scope);
       _removeStateListener = _holder.listen((scope) {
         if (mounted) {
           widget.listener(context, scope);
