@@ -3,6 +3,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:yx_scope/yx_scope.dart';
 import 'package:yx_scope_flutter/yx_scope_flutter.dart';
 
+import 'test_utils.dart';
+
 class MyAppNoProvider extends MaterialApp {
   const MyAppNoProvider({
     required Widget home,
@@ -18,7 +20,7 @@ class MyApp<T> extends StatelessWidget {
   @override
   Widget build(BuildContext context) => ScopeProvider<T>(
         holder: holder,
-        child: home,
+        child: MaterialApp(home: home),
       );
 }
 
@@ -32,12 +34,32 @@ class TestScopeStateHolder extends ScopeHolder<TestScopeContainer> {
 class TestScopeContainer extends ScopeContainer {}
 
 class ScopeWidget<T> extends StatelessWidget {
-  const ScopeWidget({super.key});
+  final CounterProvider? buildsCounter;
+  const ScopeWidget({
+    super.key,
+    this.buildsCounter,
+  });
 
   @override
   Widget build(BuildContext context) {
     final _ = ScopeProvider.of<T>(context);
-    return const Placeholder();
+    buildsCounter?.count++;
+    return Container();
+  }
+}
+
+class NoScopeWidget extends StatelessWidget {
+  final CounterProvider? buildsCounter;
+
+  const NoScopeWidget({
+    super.key,
+    required this.buildsCounter,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    buildsCounter?.count++;
+    return Container();
   }
 }
 
@@ -148,5 +170,38 @@ void main() {
         The context used was: ScopeWidget<SomeScopeContainer>(dirty)
 ''';
     expect((exception as FlutterScopeError).message, expectedMessage);
+  });
+
+  testWidgets(
+      'Scope updates reflect in subtree rebuilds only for children which have been subscribed to Scope via ScopeProvider.of',
+      (WidgetTester tester) async {
+    final holder = SomeScopeHolder();
+    final scopeBuildsCounter = CounterProvider(0);
+    final noScopeBuildsCounter = CounterProvider(0);
+    await tester.pumpWidget(MyApp(
+      holder: holder,
+      home: Stack(
+        children: [
+          ScopeWidget<SomeScopeContainer>(buildsCounter: scopeBuildsCounter),
+          NoScopeWidget(buildsCounter: noScopeBuildsCounter),
+        ],
+      ),
+    ));
+
+    await tester.pumpAndSettle();
+    expect(scopeBuildsCounter.count, 1);
+    expect(noScopeBuildsCounter.count, 1);
+
+    await holder.create();
+    await tester.pumpAndSettle();
+
+    expect(scopeBuildsCounter.count, 2);
+    expect(noScopeBuildsCounter.count, 1);
+
+    await holder.drop();
+    await tester.pumpAndSettle();
+
+    expect(scopeBuildsCounter.count, 3);
+    expect(noScopeBuildsCounter.count, 1);
   });
 }
