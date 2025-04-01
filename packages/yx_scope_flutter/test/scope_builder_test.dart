@@ -3,11 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:yx_scope/yx_scope.dart' as yx_scope;
 import 'package:yx_scope_flutter/yx_scope_flutter.dart';
 
-class CounterProvider {
-  int count;
-
-  CounterProvider(this.count);
-}
+import 'test_utils.dart';
 
 class AppScopeContainer extends yx_scope.ScopeContainer {
   late final counterProviderDep = dep(() => CounterProvider(0));
