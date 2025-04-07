@@ -1,7 +1,7 @@
 import 'package:analyzer/dart/ast/ast.dart';
 import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/type.dart';
-import 'package:analyzer/error/error.dart' as analyzer_error;
+import 'package:analyzer/error/error.dart' hide LintCode;
 import 'package:analyzer/error/listener.dart';
 import 'package:custom_lint_builder/custom_lint_builder.dart';
 import 'package:yx_scope_linter/src/priority.dart';
@@ -19,7 +19,7 @@ class UseAsyncDepForAsyncLifecycle extends DartLintRule {
         'In this case init/dispose methods will not be invoked.',
     correctionMessage: 'You should either use `$_asyncDepKeyword` declaration '
         'or do not implement AsyncLifecycle interface.',
-    errorSeverity: analyzer_error.ErrorSeverity.WARNING,
+    errorSeverity: ErrorSeverity.WARNING,
   );
 
   const UseAsyncDepForAsyncLifecycle() : super(code: _code);
@@ -71,8 +71,8 @@ class UseAsyncDepForAsyncLifecycleFix extends DartFix {
     CustomLintResolver resolver,
     ChangeReporter reporter,
     CustomLintContext context,
-    analyzer_error.AnalysisError analysisError,
-    List<analyzer_error.AnalysisError> others,
+    AnalysisError analysisError,
+    List<AnalysisError> others,
   ) {
     final builder = reporter.createChangeBuilder(
       message: 'Use `$_asyncDepKeyword` declaration',

@@ -1,5 +1,5 @@
 import 'package:analyzer/dart/ast/ast.dart';
-import 'package:analyzer/error/error.dart' as analyzer_error;
+import 'package:analyzer/error/error.dart' hide LintCode;
 import 'package:analyzer/error/listener.dart';
 import 'package:custom_lint_builder/custom_lint_builder.dart';
 import 'package:yx_scope_linter/src/names.dart';
@@ -13,7 +13,7 @@ class PassAsyncLifecycleInInitializeQueue extends DartLintRule {
         'Otherwise init/dispose methods will not be called.',
     correctionMessage: 'Override method initializeQueue in the current scope'
         ' and pass the Dep there',
-    errorSeverity: analyzer_error.ErrorSeverity.WARNING,
+    errorSeverity: ErrorSeverity.WARNING,
   );
 
   const PassAsyncLifecycleInInitializeQueue() : super(code: _code);

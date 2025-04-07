@@ -1,4 +1,4 @@
-import 'package:analyzer/error/error.dart' as analyzer_error;
+import 'package:analyzer/error/error.dart' hide LintCode;
 import 'package:analyzer/error/listener.dart';
 import 'package:custom_lint_builder/custom_lint_builder.dart';
 import 'package:yx_scope_linter/src/extensions.dart';
@@ -11,7 +11,7 @@ class ConsiderDepSuffix extends DartLintRule {
     name: 'consider_dep_suffix',
     problemMessage: 'Consider using suffix `$_suffix` for the name of your Dep',
     correctionMessage: 'Add suffix `$_suffix` like this: `entityName$_suffix`',
-    errorSeverity: analyzer_error.ErrorSeverity.INFO,
+    errorSeverity: ErrorSeverity.INFO,
   );
 
   const ConsiderDepSuffix() : super(code: _code);

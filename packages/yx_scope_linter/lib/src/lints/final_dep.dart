@@ -1,5 +1,5 @@
 import 'package:analyzer/dart/ast/ast.dart';
-import 'package:analyzer/error/error.dart' as analyzer_error;
+import 'package:analyzer/error/error.dart' hide LintCode;
 import 'package:analyzer/error/listener.dart';
 import 'package:custom_lint_builder/custom_lint_builder.dart';
 import 'package:yx_scope_linter/src/priority.dart';
@@ -10,7 +10,7 @@ class FinalDep extends DartLintRule {
     name: 'final_dep',
     problemMessage: 'A dep field must be `late final`',
     correctionMessage: 'Make your dep field `final`',
-    errorSeverity: analyzer_error.ErrorSeverity.WARNING,
+    errorSeverity: ErrorSeverity.WARNING,
   );
 
   const FinalDep() : super(code: _code);
@@ -50,8 +50,8 @@ class FinalDepFix extends DartFix {
     CustomLintResolver resolver,
     ChangeReporter reporter,
     CustomLintContext context,
-    analyzer_error.AnalysisError analysisError,
-    List<analyzer_error.AnalysisError> others,
+    AnalysisError analysisError,
+    List<AnalysisError> others,
   ) {
     final changeBuilder = reporter.createChangeBuilder(
       message: analysisError.correctionMessage!,

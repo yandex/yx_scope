@@ -1,4 +1,4 @@
-import 'package:analyzer/error/error.dart' as analyzer_error;
+import 'package:analyzer/error/error.dart' hide LintCode;
 import 'package:analyzer/error/listener.dart';
 import 'package:custom_lint_builder/custom_lint_builder.dart';
 import 'package:yx_scope_linter/src/extensions.dart';
@@ -11,7 +11,7 @@ class DepCycle extends DartLintRule {
   static const _code = LintCode(
     name: _name,
     problemMessage: _message,
-    errorSeverity: analyzer_error.ErrorSeverity.ERROR,
+    errorSeverity: ErrorSeverity.ERROR,
   );
 
   const DepCycle() : super(code: _code);
