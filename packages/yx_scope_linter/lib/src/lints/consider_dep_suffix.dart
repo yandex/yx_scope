@@ -18,10 +18,10 @@ class ConsiderDepSuffix extends DartLintRule {
 
   @override
   void run(
-      CustomLintResolver resolver,
-      ErrorReporter reporter,
-      CustomLintContext context,
-      ) {
+    CustomLintResolver resolver,
+    ErrorReporter reporter,
+    CustomLintContext context,
+  ) {
     context.registry.addClassDeclaration((node) {
       if (!ClassUtils.isScopeContainer(node)) {
         return;

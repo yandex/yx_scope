@@ -9,7 +9,7 @@ class PassAsyncLifecycleInInitializeQueue extends DartLintRule {
   static const _code = LintCode(
     name: 'pass_async_lifecycle_in_initialize_queue',
     problemMessage:
-    'asyncDep (or rawAsyncDep) must be passed to initializeQueue. '
+        'asyncDep (or rawAsyncDep) must be passed to initializeQueue. '
         'Otherwise init/dispose methods will not be called.',
     correctionMessage: 'Override method initializeQueue in the current scope'
         ' and pass the Dep there',
@@ -20,10 +20,10 @@ class PassAsyncLifecycleInInitializeQueue extends DartLintRule {
 
   @override
   void run(
-      CustomLintResolver resolver,
-      ErrorReporter reporter,
-      CustomLintContext context,
-      ) {
+    CustomLintResolver resolver,
+    ErrorReporter reporter,
+    CustomLintContext context,
+  ) {
     context.registry.addClassDeclaration((node) {
       if (!ClassUtils.isScopeContainer(node)) {
         return;
@@ -32,8 +32,8 @@ class PassAsyncLifecycleInInitializeQueue extends DartLintRule {
           .cast<MethodDeclaration?>()
           .firstWhere(
             (element) => element?.name.lexeme == MethodNames.initializeQueue,
-        orElse: () => null,
-      );
+            orElse: () => null,
+          );
 
       final depsInQueue = initializeQueueMethod?.body.childEntities
           .whereType<ListLiteral>()

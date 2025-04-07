@@ -18,10 +18,10 @@ class DepCycle extends DartLintRule {
 
   @override
   void run(
-      CustomLintResolver resolver,
-      ErrorReporter reporter,
-      CustomLintContext context,
-      ) {
+    CustomLintResolver resolver,
+    ErrorReporter reporter,
+    CustomLintContext context,
+  ) {
     context.registry.addClassDeclaration((node) {
       if (!ClassUtils.isScopeContainer(node)) {
         return;
@@ -43,12 +43,12 @@ class DepCycle extends DartLintRule {
       if (cycles.isNotEmpty) {
         for (final cycle in cycles) {
           final cycleDeps =
-          cycle.map((e) => deps[e]).whereType<DepDeclaration>();
+              cycle.map((e) => deps[e]).whereType<DepDeclaration>();
           for (final dep in cycleDeps) {
             reporter.reportErrorForToken(
               _code.copyWith(
                 problemMessage:
-                '$_message: ${cycleDeps.map((e) => e.name).join(' <- ')}'
+                    '$_message: ${cycleDeps.map((e) => e.name).join(' <- ')}'
                     ' <- ${cycleDeps.first.name}',
               ),
               dep.nameToken,

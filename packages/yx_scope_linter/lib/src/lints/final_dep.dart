@@ -17,10 +17,10 @@ class FinalDep extends DartLintRule {
 
   @override
   void run(
-      CustomLintResolver resolver,
-      ErrorReporter reporter,
-      CustomLintContext context,
-      ) {
+    CustomLintResolver resolver,
+    ErrorReporter reporter,
+    CustomLintContext context,
+  ) {
     context.registry.addClassDeclaration((node) {
       if (!ClassUtils.isScopeContainer(node)) {
         return;
@@ -49,12 +49,12 @@ class FinalDep extends DartLintRule {
 class FinalDepFix extends DartFix {
   @override
   void run(
-      CustomLintResolver resolver,
-      ChangeReporter reporter,
-      CustomLintContext context,
-      analyzer_error.AnalysisError analysisError,
-      List<analyzer_error.AnalysisError> others,
-      ) {
+    CustomLintResolver resolver,
+    ChangeReporter reporter,
+    CustomLintContext context,
+    analyzer_error.AnalysisError analysisError,
+    List<analyzer_error.AnalysisError> others,
+  ) {
     final changeBuilder = reporter.createChangeBuilder(
       message: analysisError.correctionMessage!,
       priority: FixPriority.finalDep.value,
