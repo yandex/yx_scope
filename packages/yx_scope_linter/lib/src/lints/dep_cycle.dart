@@ -45,13 +45,13 @@ class DepCycle extends DartLintRule {
           final cycleDeps =
               cycle.map((e) => deps[e]).whereType<DepDeclaration>();
           for (final dep in cycleDeps) {
-            reporter.reportErrorForToken(
+            reporter.atToken(
+              dep.nameToken,
               _code.copyWith(
                 problemMessage:
                     '$_message: ${cycleDeps.map((e) => e.name).join(' <- ')}'
                     ' <- ${cycleDeps.first.name}',
               ),
-              dep.nameToken,
             );
           }
         }

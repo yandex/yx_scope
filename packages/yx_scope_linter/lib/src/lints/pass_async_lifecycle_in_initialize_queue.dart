@@ -47,7 +47,10 @@ class PassAsyncLifecycleInInitializeQueue extends DartLintRule {
           continue;
         }
         if (!queueDeps.contains(dep.name)) {
-          reporter.reportErrorForToken(_code, dep.nameToken);
+          reporter.atToken(
+            dep.nameToken,
+            _code,
+          );
         }
       }
     });

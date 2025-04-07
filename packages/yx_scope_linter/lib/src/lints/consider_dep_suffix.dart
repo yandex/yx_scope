@@ -33,11 +33,11 @@ class ConsiderDepSuffix extends DartLintRule {
           continue;
         }
 
-        reporter.reportErrorForToken(
+        reporter.atToken(
+          dep.nameToken,
           _code.copyWith(
             correctionMessage: 'Change the name to `${dep.name}$_suffix`',
           ),
-          dep.nameToken,
         );
       }
     });

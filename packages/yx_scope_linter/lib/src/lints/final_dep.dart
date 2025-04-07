@@ -30,12 +30,10 @@ class FinalDep extends DartLintRule {
         final field = dep.field;
 
         if (!field.fields.isFinal) {
-          reporter.reportErrorForToken(
-            _code,
+          reporter.atToken(
             dep.nameToken,
-            [],
-            [],
-            field.fields,
+            _code,
+            data: field.fields,
           );
         }
       }

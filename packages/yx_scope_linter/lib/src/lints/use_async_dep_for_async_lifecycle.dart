@@ -51,12 +51,10 @@ class UseAsyncDepForAsyncLifecycle extends DartLintRule {
         final implementsAsyncLifecycle =
             asyncLifecycleType.isAssignableFromType(depClass.thisType);
         if (implementsAsyncLifecycle) {
-          reporter.reportErrorForToken(
-            _code,
+          reporter.atToken(
             methodInvocation.methodName.token,
-            [],
-            [],
-            methodInvocation,
+            _code,
+            data: methodInvocation,
           );
         }
       }
