@@ -11,6 +11,6 @@ dependencies:
 
 dev_dependencies:
   lints: ^2.0.0
-  custom_lint:
+  custom_lint: ^0.6.8
   yx_scope_linter:
     path: ..
