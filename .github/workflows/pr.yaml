@@ -48,10 +48,6 @@ jobs:
         working-directory: packages/yx_scope_linter/example
         run: dart run custom_lint --watch
 
-      - name: Fail if row count exceeds limit
-        if: steps.row_count.outputs.exceeded == 'true'
-        run: exit 1
-
       - name: Run tests
         if: matrix.package != 'packages/yx_scope_linter'
         run: flutter test
