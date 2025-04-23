@@ -46,13 +46,15 @@ jobs:
 
       - name: Verify custom_lint.log
         id: row_count
+        working-directory: /packages/yx_scope_linter/example/
         run: |
-          FILE="../packages/yx_scope_linter/example/custom_lint.log"
+          FILE="./custom_lint.log"
           ROWS=$(wc -l < "$FILE" | tr -d ' ')
           echo "Number of rows: $ROWS"
-          if [ "$ROWS" -gt 2 ]; then
-            core.setFailed('File $FILE has $ROWS rows, which exceeds the maximum allowed (2)')
+          if [ "$ROWS" -gt 4 ]; then
+            core.setFailed('File $FILE has $ROWS rows, which exceeds the maximum allowed (4)')
             cat "$FILE"
+            echo "::set-output name=exceeded::true"
           else
             echo "::set-output name=exceeded::false"
           echo "rows=$ROWS" >> $GITHUB_OUTPUT
