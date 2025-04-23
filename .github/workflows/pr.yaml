@@ -44,21 +44,8 @@ jobs:
       - name: Run linter
         run: flutter analyze
 
-      - name: Verify custom_lint.log
-        id: row_count
-        working-directory: packages/yx_scope_linter/example
-        run: |
-          flutter analyze
-          FILE="./custom_lint.log"
-          ROWS=$(wc -l < "$FILE" | tr -d ' ')
-          echo "Number of rows: $ROWS"
-          if [ "$ROWS" -gt 4 ]; then
-            core.setFailed('File $FILE has $ROWS rows, which exceeds the maximum allowed (4)')
-            cat "$FILE"
-            echo "::set-output name=exceeded::true"
-          else
-            echo "::set-output name=exceeded::false"
-          echo "rows=$ROWS" >> $GITHUB_OUTPUT
+      - name: Verify custom_lint
+        run: dart run custom_lint --watch
 
       - name: Fail if row count exceeds limit
         if: steps.row_count.outputs.exceeded == 'true'
