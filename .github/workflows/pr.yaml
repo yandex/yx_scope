@@ -46,9 +46,9 @@ jobs:
 
       - name: Verify custom_lint.log
         id: row_count
-        working-directory: /packages/yx_scope_linter/example/
+        working-directory: packages/yx_scope_linter/example
         run: |
-          ls -l
+          flutter analyze
           FILE="./custom_lint.log"
           ROWS=$(wc -l < "$FILE" | tr -d ' ')
           echo "Number of rows: $ROWS"
