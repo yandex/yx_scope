@@ -9,6 +9,7 @@ class SomeScope extends ScopeContainer {
 
   late final my1Dep = dep(() => '1');
 
+  // expect_lint: consider_dep_suffix
   late final myDep2 = dep(() => '2');
 
   // expect_lint: consider_dep_suffix
