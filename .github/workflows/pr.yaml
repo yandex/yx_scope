@@ -48,6 +48,7 @@ jobs:
         id: row_count
         working-directory: /packages/yx_scope_linter/example/
         run: |
+          ls -l
           FILE="./custom_lint.log"
           ROWS=$(wc -l < "$FILE" | tr -d ' ')
           echo "Number of rows: $ROWS"
