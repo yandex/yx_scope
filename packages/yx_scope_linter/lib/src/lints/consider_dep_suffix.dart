@@ -6,8 +6,6 @@ import 'package:yx_scope_linter/src/utils.dart';
 
 const _suffix = 'Dep';
 
-class LintCode {}
-
 class ConsiderDepSuffix extends DartLintRule {
   static const _code = LintCode(
     name: 'consider_dep_suffix',
