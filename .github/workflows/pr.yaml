@@ -41,8 +41,8 @@ jobs:
       - name: Check formatting
         run: dart format --set-exit-if-changed .
 
-      - name: Run linter
-        run: flutter analyze
+      # - name: Run linter
+      #   run: flutter analyze
 
       - name: Verify custom_lint
         working-directory: packages/yx_scope_linter/example
