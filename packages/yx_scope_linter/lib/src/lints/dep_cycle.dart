@@ -1,4 +1,4 @@
-import 'package:analyzer/error/error.dart';
+import 'package:analyzer/error/error.dart' hide LintCode;
 import 'package:analyzer/error/listener.dart';
 import 'package:custom_lint_builder/custom_lint_builder.dart';
 import 'package:yx_scope_linter/src/extensions.dart';
@@ -45,13 +45,13 @@ class DepCycle extends DartLintRule {
           final cycleDeps =
               cycle.map((e) => deps[e]).whereType<DepDeclaration>();
           for (final dep in cycleDeps) {
-            reporter.reportErrorForToken(
+            reporter.atToken(
+              dep.nameToken,
               _code.copyWith(
                 problemMessage:
                     '$_message: ${cycleDeps.map((e) => e.name).join(' <- ')}'
                     ' <- ${cycleDeps.first.name}',
               ),
-              dep.nameToken,
             );
           }
         }

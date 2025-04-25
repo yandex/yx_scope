@@ -11,7 +11,7 @@ import 'types.dart';
 class ClassUtils {
   static bool implementsInterface(ClassElement element, String ancestorName) =>
       element.interfaces
-          .map((e) => e.getDisplayString(withNullability: false))
+          .map((e) => e.getDisplayString())
           .contains(ancestorName);
 
   static bool isScopeContainer(ClassDeclaration node) {

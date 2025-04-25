@@ -1,7 +1,7 @@
 import 'package:analyzer/dart/ast/ast.dart';
 import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/type.dart';
-import 'package:analyzer/error/error.dart';
+import 'package:analyzer/error/error.dart' hide LintCode;
 import 'package:analyzer/error/listener.dart';
 import 'package:custom_lint_builder/custom_lint_builder.dart';
 import 'package:yx_scope_linter/src/priority.dart';
@@ -51,12 +51,10 @@ class UseAsyncDepForAsyncLifecycle extends DartLintRule {
         final implementsAsyncLifecycle =
             asyncLifecycleType.isAssignableFromType(depClass.thisType);
         if (implementsAsyncLifecycle) {
-          reporter.reportErrorForToken(
-            _code,
+          reporter.atToken(
             methodInvocation.methodName.token,
-            [],
-            [],
-            methodInvocation,
+            _code,
+            data: methodInvocation,
           );
         }
       }

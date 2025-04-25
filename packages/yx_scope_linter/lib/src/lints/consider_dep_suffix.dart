@@ -1,4 +1,4 @@
-import 'package:analyzer/error/error.dart';
+import 'package:analyzer/error/error.dart' hide LintCode;
 import 'package:analyzer/error/listener.dart';
 import 'package:custom_lint_builder/custom_lint_builder.dart';
 import 'package:yx_scope_linter/src/extensions.dart';
@@ -33,11 +33,11 @@ class ConsiderDepSuffix extends DartLintRule {
           continue;
         }
 
-        reporter.reportErrorForToken(
+        reporter.atToken(
+          dep.nameToken,
           _code.copyWith(
             correctionMessage: 'Change the name to `${dep.name}$_suffix`',
           ),
-          dep.nameToken,
         );
       }
     });

@@ -1,5 +1,5 @@
 import 'package:analyzer/dart/ast/ast.dart';
-import 'package:analyzer/error/error.dart';
+import 'package:analyzer/error/error.dart' hide LintCode;
 import 'package:analyzer/error/listener.dart';
 import 'package:custom_lint_builder/custom_lint_builder.dart';
 import 'package:yx_scope_linter/src/names.dart';
@@ -47,7 +47,10 @@ class PassAsyncLifecycleInInitializeQueue extends DartLintRule {
           continue;
         }
         if (!queueDeps.contains(dep.name)) {
-          reporter.reportErrorForToken(_code, dep.nameToken);
+          reporter.atToken(
+            dep.nameToken,
+            _code,
+          );
         }
       }
     });

@@ -1,5 +1,5 @@
 import 'package:analyzer/dart/ast/ast.dart';
-import 'package:analyzer/error/error.dart';
+import 'package:analyzer/error/error.dart' hide LintCode;
 import 'package:analyzer/error/listener.dart';
 import 'package:custom_lint_builder/custom_lint_builder.dart';
 import 'package:yx_scope_linter/src/priority.dart';
@@ -30,12 +30,10 @@ class FinalDep extends DartLintRule {
         final field = dep.field;
 
         if (!field.fields.isFinal) {
-          reporter.reportErrorForToken(
-            _code,
+          reporter.atToken(
             dep.nameToken,
-            [],
-            [],
-            field.fields,
+            _code,
+            data: field.fields,
           );
         }
       }
