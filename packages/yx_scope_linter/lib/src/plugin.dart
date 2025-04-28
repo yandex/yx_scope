@@ -1,4 +1,5 @@
 import 'package:custom_lint_builder/custom_lint_builder.dart';
+import 'package:yx_scope_linter/src/lints/avoid_async_dep_child_scope.dart';
 import 'package:yx_scope_linter/src/lints/consider_dep_suffix.dart';
 import 'package:yx_scope_linter/src/lints/dep_cycle.dart';
 import 'package:yx_scope_linter/src/lints/pass_async_lifecycle_in_initialize_queue.dart';
@@ -14,5 +15,6 @@ class YXScopedLintsPlugin extends PluginBase {
         ConsiderDepSuffix(),
         PassAsyncLifecycleInInitializeQueue(),
         UseAsyncDepForAsyncLifecycle(),
+        AvoidChildScopeInInitializeQueue(),
       ];
 }
