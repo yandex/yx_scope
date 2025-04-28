@@ -21,6 +21,14 @@ class ClassUtils {
         : false;
   }
 
+  static bool isModuleScope(ClassDeclaration node) {
+    final element = node.declaredElement;
+    return element != null ? scopeModuleType.isAssignableFrom(element) : false;
+  }
+
+  static bool isScopeNode(ClassDeclaration node) =>
+      isScopeContainer(node) || isModuleScope(node);
+
   static Iterable<FieldDeclaration> getInstanceFields(ClassDeclaration node) {
     return node.members
         .whereType<FieldDeclaration>()

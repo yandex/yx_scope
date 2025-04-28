@@ -19,4 +19,19 @@ const asyncLifecycleType = TypeChecker.fromName(
   packageName: 'yx_scope',
 );
 
+const childScopeHolderValueType = TypeChecker.fromName(
+  'ChildScopeHolder',
+  packageName: 'yx_scope',
+);
+
+const scopeContainerValueType = TypeChecker.fromName(
+  'ScopeContainer',
+  packageName: 'yx_scope',
+);
+
 const anyDepValueTypes = TypeChecker.any([depValueType, asyncDepValueType]);
+
+const scopeModuleType = TypeChecker.fromName(
+  'ScopeModule',
+  packageName: 'yx_scope',
+);
