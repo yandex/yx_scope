@@ -15,7 +15,7 @@ abstract class CoreScopeHolder<Scope, Container extends BaseScopeContainer>
   final _scopeStateHolder = ScopeStateHolder<ScopeState>(ScopeState.none);
   Completer? _waitLifecycleCompleter;
 
-  ScopeState get _scopeState => _scopeStateHolder.scope;
+  ScopeState get state => _scopeStateHolder.scope;
 
   CoreScopeHolder({
     List<ScopeListener>? scopeListeners,
@@ -43,7 +43,7 @@ abstract class CoreScopeHolder<Scope, Container extends BaseScopeContainer>
     if (scope is! Scope) {
       throw ScopeException('You must implement $Scope for your $Container');
     }
-    switch (_scopeState) {
+    switch (state) {
       case ScopeState.initializing:
         throw ScopeException(
           'You are trying to initialize $Container that is initializing right now. '
@@ -98,13 +98,13 @@ abstract class CoreScopeHolder<Scope, Container extends BaseScopeContainer>
           _waitLifecycleCompleter = null;
           removeListener();
           Logger.debug(
-            'Wait for scope dispose has completed, state=$_scopeState',
+            'Wait for scope dispose has completed, state=$state',
           );
-          if (!_scopeState.none) {
+          if (!state.none) {
             throw ScopeError(
               'Scope initialization waited for dispose of the previous scope state, '
               'it\'s expected to be ${ScopeState.none}, '
-              'but it appeared to be $_scopeState.'
+              'but it appeared to be $state.'
               'This is definitely an error in the library,'
               ' please contact an owner, if you see this message.',
             );
@@ -188,7 +188,7 @@ abstract class CoreScopeHolder<Scope, Container extends BaseScopeContainer>
         'both non-nullable args (drop during initialization)',
       );
     }
-    switch (_scopeState) {
+    switch (state) {
       case ScopeState.disposing:
         assert(
           false,
@@ -248,13 +248,13 @@ abstract class CoreScopeHolder<Scope, Container extends BaseScopeContainer>
             _waitLifecycleCompleter = null;
             removeListener();
             Logger.debug(
-              'Wait for scope initialization has completed, state=$_scopeState',
+              'Wait for scope initialization has completed, state=$state',
             );
-            if (!_scopeState.available) {
+            if (!state.available) {
               throw ScopeError(
                 'Scope dispose waited for initialization of the previous scope state, '
                 'it\'s expected to be ${ScopeState.available}, '
-                'but it appears to be $_scopeState. '
+                'but it appears to be $state. '
                 'This is definitely an error in the library,'
                 ' please contact an owner, if you see this message.',
               );
@@ -277,7 +277,7 @@ abstract class CoreScopeHolder<Scope, Container extends BaseScopeContainer>
     final scope = this.scope as Container? ?? initializedScope;
     if (scope == null) {
       throw ScopeError(
-        '$Container must not be null if scope state is $_scopeState',
+        '$Container must not be null if scope state is $state',
       );
     }
 
