@@ -43,12 +43,23 @@ part of 'base_scope_container.dart';
 abstract class ScopeHolder<Container extends ScopeContainer>
     extends BaseScopeHolder<Container, Container> {
   ScopeHolder({
+    @Deprecated('Use scopeObservers instead')
     List<ScopeListener>? scopeListeners,
-    List<DepListener>? depListeners,
+    @Deprecated('Use depObservers instead') List<DepListener>? depListeners,
+    @Deprecated('Use asyncDepObservers instead')
     List<AsyncDepListener>? asyncDepListeners,
+    List<ScopeObserver>? scopeObservers,
+    List<DepObserver>? depObservers,
+    List<AsyncDepObserver>? asyncDepObservers,
   }) : super(
+          scopeObservers: scopeObservers,
+          depObservers: depObservers,
+          asyncDepObservers: asyncDepObservers,
+          // ignore: deprecated_member_use_from_same_package
           scopeListeners: scopeListeners,
+          // ignore: deprecated_member_use_from_same_package
           depListeners: depListeners,
+          // ignore: deprecated_member_use_from_same_package
           asyncDepListeners: asyncDepListeners,
         );
 }
@@ -89,13 +100,24 @@ abstract class ChildScopeHolder<Container extends ChildScopeContainer<Parent>,
     extends BaseChildScopeHolder<Container, Container, Parent> {
   ChildScopeHolder(
     Parent parent, {
+    @Deprecated('Use scopeObservers instead')
     List<ScopeListener>? scopeListeners,
-    List<DepListener>? depListeners,
+    @Deprecated('Use depObservers instead') List<DepListener>? depListeners,
+    @Deprecated('Use asyncDepObservers instead')
     List<AsyncDepListener>? asyncDepListeners,
+    List<ScopeObserver>? scopeObservers,
+    List<DepObserver>? depObservers,
+    List<AsyncDepObserver>? asyncDepObservers,
   }) : super(
           parent,
+          scopeObservers: scopeObservers,
+          depObservers: depObservers,
+          asyncDepObservers: asyncDepObservers,
+          // ignore: deprecated_member_use_from_same_package
           scopeListeners: scopeListeners,
+          // ignore: deprecated_member_use_from_same_package
           depListeners: depListeners,
+          // ignore: deprecated_member_use_from_same_package
           asyncDepListeners: asyncDepListeners,
         );
 }
@@ -126,12 +148,23 @@ abstract class DataScopeHolder<Container extends DataScopeContainer<Data>,
         Data extends Object>
     extends BaseDataScopeHolder<Container, Container, Data> {
   DataScopeHolder({
+    @Deprecated('Use scopeObservers instead')
     List<ScopeListener>? scopeListeners,
-    List<DepListener>? depListeners,
+    @Deprecated('Use depObservers instead') List<DepListener>? depListeners,
+    @Deprecated('Use asyncDepObservers instead')
     List<AsyncDepListener>? asyncDepListeners,
+    List<ScopeObserver>? scopeObservers,
+    List<DepObserver>? depObservers,
+    List<AsyncDepObserver>? asyncDepObservers,
   }) : super(
+          scopeObservers: scopeObservers,
+          depObservers: depObservers,
+          asyncDepObservers: asyncDepObservers,
+          // ignore: deprecated_member_use_from_same_package
           scopeListeners: scopeListeners,
+          // ignore: deprecated_member_use_from_same_package
           depListeners: depListeners,
+          // ignore: deprecated_member_use_from_same_package
           asyncDepListeners: asyncDepListeners,
         );
 }
@@ -175,13 +208,24 @@ abstract class ChildDataScopeHolder<
     extends BaseChildDataScopeHolder<Container, Container, Parent, Data> {
   ChildDataScopeHolder(
     Parent parent, {
+    @Deprecated('Use scopeObservers instead')
     List<ScopeListener>? scopeListeners,
-    List<DepListener>? depListeners,
+    @Deprecated('Use depObservers instead') List<DepListener>? depListeners,
+    @Deprecated('Use asyncDepObservers instead')
     List<AsyncDepListener>? asyncDepListeners,
+    List<ScopeObserver>? scopeObservers,
+    List<DepObserver>? depObservers,
+    List<AsyncDepObserver>? asyncDepObservers,
   }) : super(
           parent,
+          scopeObservers: scopeObservers,
+          depObservers: depObservers,
+          asyncDepObservers: asyncDepObservers,
+          // ignore: deprecated_member_use_from_same_package
           scopeListeners: scopeListeners,
+          // ignore: deprecated_member_use_from_same_package
           depListeners: depListeners,
+          // ignore: deprecated_member_use_from_same_package
           asyncDepListeners: asyncDepListeners,
         );
 }
@@ -197,12 +241,23 @@ abstract class ChildDataScopeHolder<
 abstract class BaseScopeHolder<Scope, Container extends ScopeContainer>
     extends CoreScopeHolder<Scope, Container> {
   BaseScopeHolder({
+    @Deprecated('Use scopeObservers instead')
     List<ScopeListener>? scopeListeners,
-    List<DepListener>? depListeners,
+    @Deprecated('Use depObservers instead') List<DepListener>? depListeners,
+    @Deprecated('Use asyncDepObservers instead')
     List<AsyncDepListener>? asyncDepListeners,
+    List<ScopeObserver>? scopeObservers,
+    List<DepObserver>? depObservers,
+    List<AsyncDepObserver>? asyncDepObservers,
   }) : super(
+          scopeObservers: scopeObservers,
+          depObservers: depObservers,
+          asyncDepObservers: asyncDepObservers,
+          // ignore: deprecated_member_use_from_same_package
           scopeListeners: scopeListeners,
+          // ignore: deprecated_member_use_from_same_package
           depListeners: depListeners,
+          // ignore: deprecated_member_use_from_same_package
           asyncDepListeners: asyncDepListeners,
         );
 
@@ -230,12 +285,23 @@ abstract class BaseChildScopeHolder<
     with _BaseChildScopeHolderMixin<ScopeType, Container, Parent> {
   BaseChildScopeHolder(
     Parent parent, {
+    @Deprecated('Use scopeObservers instead')
     List<ScopeListener>? scopeListeners,
-    List<DepListener>? depListeners,
+    @Deprecated('Use depObservers instead') List<DepListener>? depListeners,
+    @Deprecated('Use asyncDepObservers instead')
     List<AsyncDepListener>? asyncDepListeners,
+    List<ScopeObserver>? scopeObservers,
+    List<DepObserver>? depObservers,
+    List<AsyncDepObserver>? asyncDepObservers,
   }) : super(
+          scopeObservers: scopeObservers,
+          depObservers: depObservers,
+          asyncDepObservers: asyncDepObservers,
+          // ignore: deprecated_member_use_from_same_package
           scopeListeners: scopeListeners,
+          // ignore: deprecated_member_use_from_same_package
           depListeners: depListeners,
+          // ignore: deprecated_member_use_from_same_package
           asyncDepListeners: asyncDepListeners,
         ) {
     this.parent = parent;
@@ -261,12 +327,23 @@ abstract class BaseDataScopeHolder<
         Data extends Object> extends CoreScopeHolder<Scope, Container>
     with _BaseDataScopeHolderMixin<Scope, Container, Data> {
   BaseDataScopeHolder({
+    @Deprecated('Use scopeObservers instead')
     List<ScopeListener>? scopeListeners,
-    List<DepListener>? depListeners,
+    @Deprecated('Use depObservers instead') List<DepListener>? depListeners,
+    @Deprecated('Use asyncDepObservers instead')
     List<AsyncDepListener>? asyncDepListeners,
+    List<ScopeObserver>? scopeObservers,
+    List<DepObserver>? depObservers,
+    List<AsyncDepObserver>? asyncDepObservers,
   }) : super(
+          scopeObservers: scopeObservers,
+          depObservers: depObservers,
+          asyncDepObservers: asyncDepObservers,
+          // ignore: deprecated_member_use_from_same_package
           scopeListeners: scopeListeners,
+          // ignore: deprecated_member_use_from_same_package
           depListeners: depListeners,
+          // ignore: deprecated_member_use_from_same_package
           asyncDepListeners: asyncDepListeners,
         );
 
@@ -297,12 +374,23 @@ abstract class BaseChildDataScopeHolder<
         _BaseDataScopeHolderMixin<ScopeType, Container, Data> {
   BaseChildDataScopeHolder(
     Parent parent, {
+    @Deprecated('Use scopeObservers instead')
     List<ScopeListener>? scopeListeners,
-    List<DepListener>? depListeners,
+    @Deprecated('Use depObservers instead') List<DepListener>? depListeners,
+    @Deprecated('Use asyncDepObservers instead')
     List<AsyncDepListener>? asyncDepListeners,
+    List<ScopeObserver>? scopeObservers,
+    List<DepObserver>? depObservers,
+    List<AsyncDepObserver>? asyncDepObservers,
   }) : super(
+          scopeObservers: scopeObservers,
+          depObservers: depObservers,
+          asyncDepObservers: asyncDepObservers,
+          // ignore: deprecated_member_use_from_same_package
           scopeListeners: scopeListeners,
+          // ignore: deprecated_member_use_from_same_package
           depListeners: depListeners,
+          // ignore: deprecated_member_use_from_same_package
           asyncDepListeners: asyncDepListeners,
         ) {
     this.parent = parent;

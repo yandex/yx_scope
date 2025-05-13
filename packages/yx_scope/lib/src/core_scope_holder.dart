@@ -8,9 +8,9 @@ part of 'base_scope_container.dart';
 /// This is the core entity that provides access to the [BaseScopeContainer].
 abstract class CoreScopeHolder<Scope, Container extends BaseScopeContainer>
     extends ScopeStateHolder<Scope?> with ScopeStateStreamable<Scope?> {
-  final ScopeListenerInternal _scopeListenerInternal;
-  final List<DepListener>? _depListeners;
-  final List<AsyncDepListener>? _asyncDepListeners;
+  final ScopeObserverInternal _scopeObserverInternal;
+  final List<DepObserver>? _depObservers;
+  final List<AsyncDepObserver>? _asyncDepObservers;
 
   final _scopeStateHolder = ScopeStateHolder<ScopeState>(ScopeState.none);
   Completer? _waitLifecycleCompleter;
@@ -18,12 +18,26 @@ abstract class CoreScopeHolder<Scope, Container extends BaseScopeContainer>
   ScopeState get _scopeState => _scopeStateHolder.scope;
 
   CoreScopeHolder({
+    List<ScopeObserver>? scopeObservers,
+    List<DepObserver>? depObservers,
+    List<AsyncDepObserver>? asyncDepObservers,
+    // ignore: deprecated_member_use_from_same_package
+    @Deprecated('Use scopeObservers instead')
     List<ScopeListener>? scopeListeners,
-    List<DepListener>? depListeners,
+    // ignore: deprecated_member_use_from_same_package
+    @Deprecated('Use depObservers instead') List<DepListener>? depListeners,
+    // ignore: deprecated_member_use_from_same_package
+    @Deprecated('Use asyncDepObservers instead')
     List<AsyncDepListener>? asyncDepListeners,
-  })  : _scopeListenerInternal = ScopeListenerInternal(scopeListeners),
-        _depListeners = depListeners,
-        _asyncDepListeners = asyncDepListeners,
+  })  : assert(!(scopeListeners != null && scopeObservers != null),
+            'Both scopeObservers and scopeListeners passed as arguments to ScopeHolder. Consider using only scopeObservers'),
+        assert(!(depListeners != null && depObservers != null),
+            'Both depObservers and depListeners passed as arguments to ScopeHolder. Consider using only depObservers'),
+        assert(!(asyncDepListeners != null && asyncDepObservers != null),
+            'Both asyncDepObservers and asyncDepListeners passed as arguments to ScopeHolder. Consider using only asyncDepObservers'),
+        _scopeObserverInternal = ScopeObserverInternal(scopeObservers),
+        _depObservers = depObservers,
+        _asyncDepObservers = asyncDepObservers,
         super(null);
 
   /// Initialize scope. [Scope] becomes available and everyone can
@@ -116,9 +130,9 @@ abstract class CoreScopeHolder<Scope, Container extends BaseScopeContainer>
         break;
     }
 
-    _prepareListeners(scope);
+    _prepareObservers(scope);
 
-    _scopeListenerInternal.onScopeStartInitialize(scope);
+    _scopeObserverInternal.onScopeStartInitialize(scope);
 
     _initializing();
 
@@ -154,13 +168,13 @@ abstract class CoreScopeHolder<Scope, Container extends BaseScopeContainer>
         );
       }
     } on Object catch (e, s) {
-      _scopeListenerInternal.onScopeInitializeFailed(scope, e, s);
+      _scopeObserverInternal.onScopeInitializeFailed(scope, e, s);
 
       await _drop(initializedScope: scope, initializedDeps: initialized);
       rethrow;
     }
     _available(scope as Scope);
-    _scopeListenerInternal.onScopeInitialized(scope);
+    _scopeObserverInternal.onScopeInitialized(scope);
   }
 
   /// Dispose scope. [Scope] becomes unavailable.
@@ -281,7 +295,7 @@ abstract class CoreScopeHolder<Scope, Container extends BaseScopeContainer>
       );
     }
 
-    _scopeListenerInternal.onScopeStartDispose(scope);
+    _scopeObserverInternal.onScopeStartDispose(scope);
 
     _disposing();
 
@@ -310,7 +324,7 @@ abstract class CoreScopeHolder<Scope, Container extends BaseScopeContainer>
                 e,
                 s,
               );
-              _scopeListenerInternal.onScopeDisposeDepFailed(
+              _scopeObserverInternal.onScopeDisposeDepFailed(
                 scope,
                 dep,
                 e,
@@ -325,9 +339,9 @@ abstract class CoreScopeHolder<Scope, Container extends BaseScopeContainer>
       );
     }
     scope._unregister();
-    _clearListeners(scope);
+    _clearObservers(scope);
     await _disposed();
-    _scopeListenerInternal.onScopeDisposed(scope);
+    _scopeObserverInternal.onScopeDisposed(scope);
   }
 
   // ignore: use_setters_to_change_properties
@@ -358,15 +372,15 @@ abstract class CoreScopeHolder<Scope, Container extends BaseScopeContainer>
 
   void _disposing() => _updateScope(ScopeState.disposing);
 
-  void _prepareListeners(Container scope) {
-    scope._depListener._listeners = _depListeners;
-    scope._asyncDepListener._listeners = _asyncDepListeners;
-    scope._asyncDepListener._asyncDepListeners = _asyncDepListeners;
+  void _prepareObservers(Container scope) {
+    scope._depObserver._observers = _depObservers;
+    scope._asyncDepObserver._observers = _asyncDepObservers;
+    scope._asyncDepObserver._asyncDepObservers = _asyncDepObservers;
   }
 
-  void _clearListeners(Container scope) {
-    scope._depListener._listeners = null;
-    scope._asyncDepListener._listeners = null;
-    scope._asyncDepListener._asyncDepListeners = null;
+  void _clearObservers(Container scope) {
+    scope._depObserver._observers = null;
+    scope._asyncDepObserver._observers = null;
+    scope._asyncDepObserver._asyncDepObservers = null;
   }
 }

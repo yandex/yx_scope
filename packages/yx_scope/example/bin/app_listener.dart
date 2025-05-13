@@ -1,47 +1,20 @@
 import 'package:yx_scope/yx_scope.dart';
+import './main.dart';
 
-void main() async {
-  final appScopeHolder = AppScopeHolder();
+class AppScopeHolderWithListener extends ScopeHolder<AppScopeContainer> {
+  static const _listener = AppListener();
 
-  await appScopeHolder.create();
-
-  print(appScopeHolder.scope?.routerDelegateDep.get);
-
-  await appScopeHolder.drop();
-
-  print(appScopeHolder.scope?.routerDelegateDep.get);
-}
-
-class AppRouterDelegate {}
-
-class AppStateObserver {
-  final AppRouterDelegate appRouteDelegate;
-
-  AppStateObserver(this.appRouteDelegate);
-}
-
-class AppScopeContainer extends ScopeContainer {
-  late final routerDelegateDep = dep(() => AppRouterDelegate());
-
-  late final appStateObserverDep = dep(
-    () => AppStateObserver(
-      routerDelegateDep.get,
-    ),
-  );
-}
-
-class AppScopeHolder extends ScopeHolder<AppScopeContainer> {
-  static const _observer = AppObserver();
-
-  AppScopeHolder()
-      : super(scopeObservers: [_observer], depObservers: [_observer]);
+  AppScopeHolderWithListener()
+      // ignore: deprecated_member_use
+      : super(scopeListeners: [_listener], depListeners: [_listener]);
 
   @override
   AppScopeContainer createContainer() => AppScopeContainer();
 }
 
-class AppObserver implements ScopeObserver, DepObserver, AsyncDepObserver {
-  const AppObserver();
+// ignore: deprecated_member_use
+class AppListener implements ScopeListener, DepListener, AsyncDepListener {
+  const AppListener();
 
   static void _log(
     String message, [

@@ -1,28 +1,32 @@
 part of '../base_scope_container.dart';
 
-class ScopeListenerInternal implements RawScopeListener {
-  final List<ScopeListener>? _listeners;
+/// DO NOT USE THIS CLASS MANUALLY
+///
+/// [RawScopeObserver] implementation for [CoreScopeHolder] that notifies
+/// [ScopeObserver]s
+class ScopeObserverInternal implements RawScopeObserver {
+  final List<ScopeObserver>? _observers;
 
-  const ScopeListenerInternal(this._listeners);
+  const ScopeObserverInternal(this._observers);
 
   @override
   void onScopeStartInitialize(BaseScopeContainer scope) {
-    RawScopeListener.override?.safeNotify(
+    RawScopeObserver.override?.safeNotify(
       (listener) => listener.onScopeStartInitialize(scope),
     );
-    _safeNotifyAll<ScopeListener>(
-      _listeners,
+    _safeNotifyAll<ScopeObserver>(
+      _observers,
       (listener) => listener.onScopeStartInitialize(scope._id),
     );
   }
 
   @override
   void onScopeInitialized(BaseScopeContainer scope) {
-    RawScopeListener.override?.safeNotify(
+    RawScopeObserver.override?.safeNotify(
       (listener) => listener.onScopeInitialized(scope),
     );
-    _safeNotifyAll<ScopeListener>(
-      _listeners,
+    _safeNotifyAll<ScopeObserver>(
+      _observers,
       (listener) => listener.onScopeInitialized(scope._id),
     );
   }
@@ -33,15 +37,15 @@ class ScopeListenerInternal implements RawScopeListener {
     Object exception,
     StackTrace stackTrace,
   ) {
-    RawScopeListener.override?.safeNotify(
+    RawScopeObserver.override?.safeNotify(
       (listener) => listener.onScopeInitializeFailed(
         scope,
         exception,
         stackTrace,
       ),
     );
-    _safeNotifyAll<ScopeListener>(
-      _listeners,
+    _safeNotifyAll<ScopeObserver>(
+      _observers,
       (listener) => listener.onScopeInitializeFailed(
         scope._id,
         exception,
@@ -52,22 +56,22 @@ class ScopeListenerInternal implements RawScopeListener {
 
   @override
   void onScopeStartDispose(BaseScopeContainer scope) {
-    RawScopeListener.override?.safeNotify(
+    RawScopeObserver.override?.safeNotify(
       (listener) => listener.onScopeStartDispose(scope),
     );
-    _safeNotifyAll<ScopeListener>(
-      _listeners,
+    _safeNotifyAll<ScopeObserver>(
+      _observers,
       (listener) => listener.onScopeStartDispose(scope._id),
     );
   }
 
   @override
   void onScopeDisposed(BaseScopeContainer scope) {
-    RawScopeListener.override?.safeNotify(
+    RawScopeObserver.override?.safeNotify(
       (listener) => listener.onScopeDisposed(scope),
     );
-    _safeNotifyAll<ScopeListener>(
-      _listeners,
+    _safeNotifyAll<ScopeObserver>(
+      _observers,
       (listener) => listener.onScopeDisposed(scope._id),
     );
   }
@@ -79,7 +83,7 @@ class ScopeListenerInternal implements RawScopeListener {
     Object exception,
     StackTrace stackTrace,
   ) {
-    RawScopeListener.override?.safeNotify(
+    RawScopeObserver.override?.safeNotify(
       (listener) => listener.onScopeDisposeDepFailed(
         scope,
         dep,
@@ -87,8 +91,8 @@ class ScopeListenerInternal implements RawScopeListener {
         stackTrace,
       ),
     );
-    _safeNotifyAll<ScopeListener>(
-      _listeners,
+    _safeNotifyAll<ScopeObserver>(
+      _observers,
       (listener) => listener.onScopeDisposeDepFailed(
         scope._id,
         dep._id,
@@ -99,28 +103,32 @@ class ScopeListenerInternal implements RawScopeListener {
   }
 }
 
-class DepListenerInternal {
+/// DO NOT USE THIS CLASS MANUALLY
+///
+/// [RawDepObserver] implementation for [Dep] that notifies
+/// [DepObserver]s
+class DepObserverInternal {
   final BaseScopeContainer _scope;
-  List<DepListener>? _listeners;
+  List<DepObserver>? _observers;
 
-  DepListenerInternal(this._scope);
+  DepObserverInternal(this._scope);
 
   void onValueStartCreate(Dep dep) {
-    RawDepListener.override?.safeNotify(
+    RawDepObserver.override?.safeNotify(
       (listener) => listener.onValueStartCreate(_scope, dep),
     );
-    _safeNotifyAll<DepListener>(
-      _listeners,
+    _safeNotifyAll<DepObserver>(
+      _observers,
       (listener) => listener.onValueStartCreate(_scope._id, dep._id),
     );
   }
 
   void onValueCreated(Dep dep, Object? value) {
-    RawDepListener.override?.safeNotify(
+    RawDepObserver.override?.safeNotify(
       (listener) => listener.onValueCreated(_scope, dep, value),
     );
-    _safeNotifyAll<DepListener>(
-      _listeners,
+    _safeNotifyAll<DepObserver>(
+      _observers,
       (listener) => listener.onValueCreated(
         _scope._id,
         dep._id,
@@ -134,7 +142,7 @@ class DepListenerInternal {
     Object exception,
     StackTrace stackTrace,
   ) {
-    RawDepListener.override?.safeNotify(
+    RawDepObserver.override?.safeNotify(
       (listener) => listener.onValueCreateFailed(
         _scope,
         dep,
@@ -142,8 +150,8 @@ class DepListenerInternal {
         stackTrace,
       ),
     );
-    _safeNotifyAll<DepListener>(
-      _listeners,
+    _safeNotifyAll<DepObserver>(
+      _observers,
       (listener) => listener.onValueCreateFailed(
         _scope._id,
         dep._id,
@@ -154,11 +162,11 @@ class DepListenerInternal {
   }
 
   void onValueCleared(Dep dep, Object? value) {
-    RawDepListener.override?.safeNotify(
+    RawDepObserver.override?.safeNotify(
       (listener) => listener.onValueCleared(_scope, dep, value),
     );
-    _safeNotifyAll<DepListener>(
-      _listeners,
+    _safeNotifyAll<DepObserver>(
+      _observers,
       (listener) => listener.onValueCleared(
         _scope._id,
         dep._id,
@@ -168,47 +176,51 @@ class DepListenerInternal {
   }
 }
 
-class AsyncDepListenerInternal extends DepListenerInternal {
-  List<AsyncDepListener>? _asyncDepListeners;
+/// DO NOT USE THIS CLASS MANUALLY
+///
+/// [RawDepObserver] implementation for [AsyncDep] that notifies
+/// [AsyncDepObserver]s
+class AsyncDepObserverInternal extends DepObserverInternal {
+  List<AsyncDepObserver>? _asyncDepObservers;
 
-  AsyncDepListenerInternal(BaseScopeContainer scope) : super(scope);
+  AsyncDepObserverInternal(BaseScopeContainer scope) : super(scope);
 
   void onDepStartInitialize(Dep dep) {
-    RawAsyncDepListener.override?.safeNotify(
+    RawAsyncDepObserver.override?.safeNotify(
       (listener) => listener.onDepStartInitialize(_scope, dep),
     );
-    _safeNotifyAll<AsyncDepListener>(
-      _asyncDepListeners,
+    _safeNotifyAll<AsyncDepObserver>(
+      _asyncDepObservers,
       (listener) => listener.onDepStartInitialize(_scope._id, dep._id),
     );
   }
 
   void onDepInitialized(Dep dep) {
-    RawAsyncDepListener.override?.safeNotify(
+    RawAsyncDepObserver.override?.safeNotify(
       (listener) => listener.onDepInitialized(_scope, dep),
     );
-    _safeNotifyAll<AsyncDepListener>(
-      _asyncDepListeners,
+    _safeNotifyAll<AsyncDepObserver>(
+      _asyncDepObservers,
       (listener) => listener.onDepInitialized(_scope._id, dep._id),
     );
   }
 
   void onDepStartDispose(Dep dep) {
-    RawAsyncDepListener.override?.safeNotify(
+    RawAsyncDepObserver.override?.safeNotify(
       (listener) => listener.onDepStartDispose(_scope, dep),
     );
-    _safeNotifyAll<AsyncDepListener>(
-      _asyncDepListeners,
+    _safeNotifyAll<AsyncDepObserver>(
+      _asyncDepObservers,
       (listener) => listener.onDepStartDispose(_scope._id, dep._id),
     );
   }
 
   void onDepDisposed(Dep dep) {
-    RawAsyncDepListener.override?.safeNotify(
+    RawAsyncDepObserver.override?.safeNotify(
       (listener) => listener.onDepDisposed(_scope, dep),
     );
-    _safeNotifyAll<AsyncDepListener>(
-      _asyncDepListeners,
+    _safeNotifyAll<AsyncDepObserver>(
+      _asyncDepObservers,
       (listener) => listener.onDepDisposed(_scope._id, dep._id),
     );
   }
@@ -218,7 +230,7 @@ class AsyncDepListenerInternal extends DepListenerInternal {
     Object exception,
     StackTrace stackTrace,
   ) {
-    RawAsyncDepListener.override?.safeNotify(
+    RawAsyncDepObserver.override?.safeNotify(
       (listener) => listener.onDepInitializeFailed(
         _scope,
         dep,
@@ -226,8 +238,8 @@ class AsyncDepListenerInternal extends DepListenerInternal {
         stackTrace,
       ),
     );
-    _safeNotifyAll<AsyncDepListener>(
-      _asyncDepListeners,
+    _safeNotifyAll<AsyncDepObserver>(
+      _asyncDepObservers,
       (listener) => listener.onDepInitializeFailed(
         _scope._id,
         dep._id,
@@ -242,7 +254,7 @@ class AsyncDepListenerInternal extends DepListenerInternal {
     Object exception,
     StackTrace stackTrace,
   ) {
-    RawAsyncDepListener.override?.safeNotify(
+    RawAsyncDepObserver.override?.safeNotify(
       (listener) => listener.onDepDisposeFailed(
         _scope,
         dep,
@@ -250,8 +262,8 @@ class AsyncDepListenerInternal extends DepListenerInternal {
         stackTrace,
       ),
     );
-    _safeNotifyAll<AsyncDepListener>(
-      _asyncDepListeners,
+    _safeNotifyAll<AsyncDepObserver>(
+      _asyncDepObservers,
       (listener) => listener.onDepDisposeFailed(
         _scope._id,
         dep._id,
