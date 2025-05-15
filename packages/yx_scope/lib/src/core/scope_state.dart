@@ -1,12 +1,34 @@
-enum ScopeState {
-  none,
-  initializing,
-  available,
-  disposing,
+abstract class ScopeState<Scope> {
+  ScopeState._();
+
+  factory ScopeState.none() = ScopeStateNone;
+  factory ScopeState.initializing() = ScopeStateInitializing;
+  factory ScopeState.available({required Scope scope}) = ScopeStateAvailable;
+  factory ScopeState.disposing() = ScopeStateDisposing;
+
+  bool get none => this is ScopeStateNone;
+
+  bool get initializing => this is ScopeStateInitializing;
+
+  bool get available => this is ScopeStateAvailable;
+
+  bool get disposing => this is ScopeStateDisposing;
 }
 
-extension ScopeStateExt on ScopeState {
-  bool get none => this == ScopeState.none;
+class ScopeStateNone<Scope> extends ScopeState<Scope> {
+  ScopeStateNone() : super._();
+}
 
-  bool get available => this == ScopeState.available;
+class ScopeStateInitializing<Scope> extends ScopeState<Scope> {
+  ScopeStateInitializing() : super._();
+}
+
+class ScopeStateAvailable<Scope> extends ScopeState<Scope> {
+  final Scope scope;
+
+  ScopeStateAvailable({required this.scope}) : super._();
+}
+
+class ScopeStateDisposing<Scope> extends ScopeState<Scope> {
+  ScopeStateDisposing() : super._();
 }
