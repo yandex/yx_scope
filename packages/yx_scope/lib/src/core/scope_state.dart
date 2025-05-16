@@ -17,18 +17,30 @@ abstract class ScopeState<Scope> {
 
 class ScopeStateNone<Scope> extends ScopeState<Scope> {
   ScopeStateNone() : super._();
+
+  @override
+  String toString() => 'ScopeState<$Scope>.none';
 }
 
 class ScopeStateInitializing<Scope> extends ScopeState<Scope> {
   ScopeStateInitializing() : super._();
+
+  @override
+  String toString() => 'ScopeState<$Scope>.initializing';
 }
 
 class ScopeStateAvailable<Scope> extends ScopeState<Scope> {
   final Scope scope;
 
   ScopeStateAvailable({required this.scope}) : super._();
+
+  @override
+  String toString() => 'ScopeState<$Scope>.available';
 }
 
 class ScopeStateDisposing<Scope> extends ScopeState<Scope> {
   ScopeStateDisposing() : super._();
+
+  @override
+  String toString() => 'ScopeState<$Scope>.disposing';
 }
