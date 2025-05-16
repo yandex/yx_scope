@@ -50,6 +50,10 @@ class ScopeStateHolder<Scope> {
   /// The [listener] callback will be called immediately on addition and
   /// synchronously whenever [state] changes.
   ///
+  /// Note: This method only calls the callback when the state is [ScopeStateAvailable]
+  /// (passing the scope object) or when the scope is [ScopeStateNone] (passing null).
+  /// It doesn't trigger for [ScopeStateInitializing] or [ScopeStateDisposing] states.
+  ///
   /// Set [emitImmediately] to true if you want to an immediate execution
   /// of the [listener] with the current state.
   ///
@@ -76,6 +80,8 @@ class ScopeStateHolder<Scope> {
   ///
   /// The [listener] callback will be called immediately on addition and
   /// synchronously whenever [state] changes.
+  ///
+  /// Note: This method emits on every [ScopeState] change.
   ///
   /// Set [emitImmediately] to true if you want to an immediate execution
   /// of the [listener] with the current state.
