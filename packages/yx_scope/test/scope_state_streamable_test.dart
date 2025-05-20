@@ -1,6 +1,5 @@
 import 'package:test/test.dart';
 import 'package:yx_scope/src/base_scope_container.dart';
-import 'package:yx_scope/src/core/scope_state.dart';
 import 'package:yx_scope/yx_scope.dart';
 
 import 'utils/test_logger.dart';
