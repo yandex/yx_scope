@@ -1,7 +1,7 @@
 name: yx_scope_linter
 description: A package that contains static analysis rules for yx_scope DI framework
 version: 0.1.2
-repository: 'https://github.com/yandex/yx_scope'
+repository: https://github.com/yandex/yx_scope
 publish_to: 'none'
 topics:
   - di
